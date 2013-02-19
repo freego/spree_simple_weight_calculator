@@ -1,0 +1,7 @@
+it:
+  simple_weight: Peso Semplice
+  costs_string: Tabella dei costi (peso massimo:costo, uno per riga)
+  max_item_size: Dimensione massima accettata di un prodotto (lato più lungo)
+  handling_fee: Costi di confezionamento
+  handling_max: Spesa sopra la quale non si applicano i costi di confezionamento
+  default_weight: Peso di default (applicato ai prodotti senza peso)
