@@ -1,9 +1,10 @@
 Spree Simple Weight Calculator
 ==============================
 
-This is a shipping costs calculator based on total order weight.
+This is a shipping costs calculator for the Ruby on rails e-commerce solution Spree.
 
-You specify a weight/price table in this way:
+It's based on the total weight of the order.
+You simply specify a weight/price table in a textarea like this:
 
 ```
 5:10
@@ -24,7 +25,7 @@ Usage
 
 Add to your Gemfile
 
-    gem 'spree_simple_weight',  :github => 'freego/spree_simple_weight_calculator'
+    gem 'spree_simple_weight_calculator'
 
 Create a shipping method and choose "Simple Weight" as calculator.
 
@@ -43,4 +44,4 @@ Credits
 Inspired by https://github.com/dancinglightning/spree-postal-service .
 
 
-Copyright (c) 2013 Alessandro Lepore, released under the New BSD License
+Copyright (c) 2013 freego http://freegoweb.it - Released under the New BSD License
