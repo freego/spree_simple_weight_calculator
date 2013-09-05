@@ -25,7 +25,8 @@ Usage
 
 Add to your Gemfile
 
-    gem 'spree_simple_weight_calculator'
+    # for spree 1.3.x
+    gem 'spree_simple_weight_calculator', '~> 1.3.0'
 
 Create a shipping method and choose "Simple Weight" as calculator.
 
@@ -44,4 +45,4 @@ Credits
 Inspired by https://github.com/dancinglightning/spree-postal-service .
 
 
-Copyright (c) 2013 freego http://freegoweb.it - Released under the New BSD License
+Copyright (c) 2013 freego http://freegoweb.it - Released under the MIT License

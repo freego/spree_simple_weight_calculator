@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.author    = 'Alessandro Lepore'
   s.email     = 'a.lepore@freegoweb.it'
   s.homepage  = 'http://freegoweb.it'
+  s.license   = 'MIT'
 
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
