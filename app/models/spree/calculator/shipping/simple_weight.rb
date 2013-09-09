@@ -1,11 +1,11 @@
 module Spree
   module Calculator::Shipping
     class SimpleWeight < ShippingCalculator
-      preference :costs_string, :text, :default => "1:5\n2:7\n5:10\n10:15\n100:50"
-      preference :default_weight, :decimal, :default => 1
-      preference :max_item_size, :decimal, :default => 0
-      preference :handling_fee, :decimal, :default => 0
-      preference :handling_max, :decimal, :default => 0
+      preference :costs_string, :text, default: "1:5\n2:7\n5:10\n10:15\n100:50"
+      preference :default_weight, :decimal, default: 1
+      preference :max_item_size, :decimal, default: 0
+      preference :handling_fee, :decimal, default: 0
+      preference :handling_max, :decimal, default: 0
 
       attr_accessible :preferred_costs_string,  :preferred_max_item_size,
                       :preferred_handling_max, :preferred_handling_fee,
