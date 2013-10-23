@@ -64,4 +64,14 @@ describe Spree::Calculator::SimpleWeight do
     calculator.available?(order).should == false
   end
 
+  it "correctly calculates shipping when costs string has useless spaces and newlines" do
+    calculator.stub(:preferred_costs_string => %q{50:20
+                                                  100:50.3
+
+
+                                                  })
+    calculator.available?(order).should == true
+    calculator.compute(order).should == 71.8
+  end
+
 end
