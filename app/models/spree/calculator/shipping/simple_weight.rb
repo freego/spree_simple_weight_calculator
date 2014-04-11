@@ -32,13 +32,17 @@ module Spree
       end
 
       private
+      def clean_costs_string
+        preferred_costs_string.strip
+      end
+
       def compute_package(package)
         content_items = package.contents
         line_items_total = total(content_items)
         handling_fee = preferred_handling_max > line_items_total ? preferred_handling_fee : 0
 
         total_weight = total_weight(content_items)
-        costs = costs_string_to_hash(preferred_costs_string)
+        costs = costs_string_to_hash(clean_costs_string)
         weight_class = costs.keys.select { |w| total_weight <= w }.min
         shipping_costs = costs[weight_class]
 
@@ -47,10 +51,10 @@ module Spree
       end
 
       def costs_string_valid?
-        !preferred_costs_string.empty? &&
-        preferred_costs_string.count(':') > 0 &&
-        preferred_costs_string.split(/\:|\n/).size.even? &&
-        preferred_costs_string.split(/\:|\n/).all? { |s | s.match(/^\d|\.+$/) }
+        !clean_costs_string.empty? &&
+        clean_costs_string.count(':') > 0 &&
+        clean_costs_string.split(/\:|\n/).size.even? &&
+        clean_costs_string.split(/\:|\n/).all? { |s | s.strip.match(/^\d|\.+$/) }
       end
 
       def item_oversized?(item)
@@ -64,7 +68,7 @@ module Spree
 
       def order_overweight?(content_items)
         total_weight = total_weight(content_items)
-        hash = costs_string_to_hash(preferred_costs_string)
+        hash = costs_string_to_hash(clean_costs_string)
 
         total_weight > hash.keys.max
       end

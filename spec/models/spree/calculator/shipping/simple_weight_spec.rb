@@ -64,6 +64,16 @@ module Spree
         calculator.stub(preferred_costs_string: "abc:dfg\nerge:67")
         calculator.available?(package).should == false
       end
+
+      it "correctly calculates shipping when costs string has useless spaces and newlines" do
+        calculator.stub(:preferred_costs_string => %q{50:20
+                                                      100:50.3
+
+
+                                                      })
+        calculator.available?(package).should == true
+        calculator.compute(package).should == 71.8
+      end
     end
   end
 end
