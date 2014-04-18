@@ -7,10 +7,6 @@ module Spree
       preference :handling_fee, :decimal, default: 0
       preference :handling_max, :decimal, default: 0
 
-      attr_accessible :preferred_costs_string,  :preferred_max_item_size,
-                      :preferred_handling_max, :preferred_handling_fee,
-                      :preferred_default_weight
-
       def self.description
         Spree.t(:simple_weight)
       end
@@ -31,11 +27,6 @@ module Spree
         true
       end
 
-      private
-      def clean_costs_string
-        preferred_costs_string.strip
-      end
-
       def compute_package(package)
         content_items = package.contents
         line_items_total = total(content_items)
@@ -48,6 +39,11 @@ module Spree
 
         return 0 unless shipping_costs
         shipping_costs + handling_fee
+      end
+
+      private
+      def clean_costs_string
+        preferred_costs_string.strip
       end
 
       def costs_string_valid?
