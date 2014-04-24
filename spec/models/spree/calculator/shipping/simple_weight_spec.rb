@@ -4,10 +4,11 @@ module Spree
   module Calculator::Shipping
     describe SimpleWeight do
 
-      options = { preferred_costs_string: "50:20\n100:50.3",
+      options = { preferred_costs_string: "0.5:5\n1:10\n50:20\n100:50.3",
                   preferred_handling_max: 120,
                   preferred_handling_fee: 21.5,
-                  preferred_max_item_size: 35 }
+                  preferred_max_item_size: 35,
+                  preferred_default_weight: 1 }
 
       let(:calculator) { Calculator::Shipping::SimpleWeight.new(options) }
 
@@ -21,22 +22,37 @@ module Spree
                                          depth: 1,
                                          height: 1,
                                          price: 6) }
+      let(:variant3) { double("Variant",  weight: 0.0,
+                                          width: 1,
+                                          depth: 1,
+                                          height: 1,
+                                          price: 10) }
 
       let(:package) { double(Stock::Package,
                              order: mock_model(Order),
-                             contents: [Stock::Package::ContentItem.new(variant1, 4),
-                                        Stock::Package::ContentItem.new(variant2, 6)]) }
+                             contents: [Stock::Package::ContentItem.new(1,variant1, 4),
+                                        Stock::Package::ContentItem.new(2,variant2, 6)]) }
+
+      let(:package2) { double(Stock::Package,
+                              order: mock_model(Order),
+                              contents: [Stock::Package::ContentItem.new(1,variant3,1)]
+        )}
+
+      it "correctly select the default weight shipping price when no weight on the variant", :focus => true do
+        calculator.available?(package2).should == true
+        calculator.compute_package(package2).should == 31.5 # 10 shipping + 21.5 handling
+      end
 
       it "correctly calculates shipping when handling fee applies" do
         calculator.available?(package).should == true
-        calculator.compute(package).should == 71.8 # 50.3 cost + 21.5 handling
+        calculator.compute_package(package).should == 71.8 # 50.3 cost + 21.5 handling
       end
 
       it "correctly calculates shipping when handling fee does not apply" do
         calculator.stub(preferred_handling_max: 10)
 
         calculator.available?(package).should == true
-        calculator.compute(package).should == 50.3
+        calculator.compute_package(package).should == 50.3
       end
 
       it "does not apply to overweight order" do
@@ -72,8 +88,10 @@ module Spree
 
                                                       })
         calculator.available?(package).should == true
-        calculator.compute(package).should == 71.8
+        calculator.compute_package(package).should == 71.8
       end
+
+
     end
   end
 end
