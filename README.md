@@ -1,10 +1,12 @@
 Spree Simple Weight Calculator
 ==============================
 
-This is a shipping costs calculator for the Ruby on rails e-commerce solution Spree.
+Includes some shipping costs calculator for Spree Commerce.
 
-It's based on the total weight of the order.
-You simply specify a weight/price table in a textarea like this:
+SimpleWeight
+============
+It's based on the total weight of the package.
+You simply specify a weight/price table in the textarea like this:
 
 ```
 5:10
@@ -13,23 +15,29 @@ You simply specify a weight/price table in a textarea like this:
 ```
 
 This means:
-- up to 5kg cost is 10$
-- up to 10.5kg cost is 15$
-- up to 100kg cost is 50.5$
+- up to 5kg cost is 10
+- up to 10.5kg cost is 15
+- up to 100kg cost is 50.5
 - over 100kg this shipping method doesn't apply
 
-An handling fee may also be added.
+An optional handling fee can also be added.
+
+ItemWeight
+==========
+Similar to `SimpleWeight`, but shipping cost is calculated on *each single item* of the package, and them summed up.
+Useful if each item is shipped in different pack.
+
 
 Usage
 =====
 
 Add to your Gemfile
+```ruby
+gem 'spree_simple_weight_calculator', github: 'freego/spree_simple_weight_calculator',
+                                      branch: '2-2-stable'
+```
 
-    gem 'spree_simple_weight_calculator',
-      github: 'freego/spree_simple_weight_calculator',
-      branch: '2-2-stable'
-
-Create a shipping method and choose "Simple Weight" as calculator.
+Create a shipping method from the admin interface and choose the right calculator.
 
 Testing
 -------

@@ -37,8 +37,7 @@ module Spree
         weight_class = costs.keys.select { |w| total_weight <= w }.min
         shipping_costs = costs[weight_class]
 
-        return 0 unless shipping_costs
-        shipping_costs + handling_fee
+        shipping_costs ? shipping_costs + handling_fee : 0
       end
 
       private

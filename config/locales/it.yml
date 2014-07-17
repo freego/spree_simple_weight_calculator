@@ -6,3 +6,4 @@ it:
     handling_fee: Costi di confezionamento
     handling_max: Spesa sopra la quale non si applicano i costi di confezionamento
     default_weight: Peso di default (applicato ai prodotti senza peso)
+    item_weight: Peso Singolo Articolo

@@ -19,6 +19,7 @@ module SpreeSimpleWeightCalculator
 
     initializer 'spree.register.calculators.simple_weight', after: 'spree.register.calculators' do |app|
       app.config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::SimpleWeight
+      app.config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::ItemWeight
     end
 
     config.to_prepare &method(:activate).to_proc
