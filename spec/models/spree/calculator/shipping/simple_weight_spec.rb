@@ -12,17 +12,17 @@ module Spree
 
       let(:calculator) { Calculator::Shipping::SimpleWeight.new(options) }
 
-      let(:variant1) { double("Variant", weight: 5,
+      let(:variant1) { double("Variant", calculator_weight: 5,
                                          width: 1,
                                          depth: 1,
                                          height: 1,
                                          price: 4) }
-      let(:variant2) { double("Variant", weight: 10,
+      let(:variant2) { double("Variant", calculator_weight: 10,
                                          width: 1,
                                          depth: 1,
                                          height: 1,
                                          price: 6) }
-      let(:variant3) { double("Variant",  weight: 0.0,
+      let(:variant3) { double("Variant",  calculator_weight: 0.0,
                                           width: 1,
                                           depth: 1,
                                           height: 1,
@@ -56,7 +56,7 @@ module Spree
       end
 
       it "does not apply to overweight order" do
-        variant1.stub(weight: 100)
+        variant1.stub(calculator_weight: 100)
 
         calculator.available?(package).should == false
       end

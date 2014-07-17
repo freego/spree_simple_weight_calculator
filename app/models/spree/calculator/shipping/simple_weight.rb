@@ -81,10 +81,11 @@ module Spree
 
       def total_weight(contents)
         weight = 0
-        contents.each do |item|          
-          weight += item.quantity * (item.variant.weight > 0.0 ? item.variant.weight : preferred_default_weight)
+        contents.each do |item|
+          item_weight = item.variant.calculator_weight > 0.0 ? item.variant.calculator_weight : preferred_default_weight
+          weight += item.quantity * item_weight
         end
-        
+
         weight
       end
     end
