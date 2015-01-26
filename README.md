@@ -34,7 +34,7 @@ Usage
 Add to your Gemfile
 ```ruby
 gem 'spree_simple_weight_calculator', github: 'freego/spree_simple_weight_calculator',
-                                      branch: '2-2-stable'
+                                      branch: '2-x-stable'
 ```
 
 Create a shipping method from the admin interface and choose the right calculator.
